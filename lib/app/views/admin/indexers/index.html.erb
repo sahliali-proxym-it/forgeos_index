@@ -1,0 +1,16 @@
+<% form_tag(admin_indexers_path) do %>
+  <div class="backgrounds big-header">
+    <div class="interact-links">
+      <div class="interact-links">
+        <%= submit_tag "valider", :class => "backgrounds interact-button" %>
+      </div>
+    </div>
+  </div>
+  <div id="content">
+    <div class="inner-content">
+     
+        <%= get_html_options_for_model %>
+ 
+    </div>
+  </div>
+<% end %>
