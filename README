@@ -1,0 +1,39 @@
+Author
+=============
+SAHLI Ali
+Email ali.sahli@proxym-it.com
+PROXYM-IT
+
+ForgeosIndex
+============
+
+Plugin to Manage Sphinx Indexation
+
+Installation
+=============
+
+After installation the pulgin
+
+*** add the resources indexers in your route.rb
+
+map.namespace :admin do |admin|
+  admin.resources :indexers
+end
+
+*** add url in your view
+In vendor/plugin/forgeos_core/lib/forgeos/admin_menu.rb
+
+{
+      :title => 'back_office.menu.sphinx',
+      :url => { :controller => 'admin/indexers' },
+      :i18n => true,
+      :html => { :class => 'right' }
+}
+
+Example
+===========
+
+
+
+===========
+Copyright (c) 2010 [Proxym-IT], released under the MIT license
