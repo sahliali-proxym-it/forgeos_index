@@ -8,9 +8,7 @@ def get_all_models
 end
 
 def get_models_to_indexes
-  models = []
-  get_all_models.sort.each { |model| models << model if (model.constantize.table_exists? && model_is_valid_to_indexes?(model) && !model_has_sphinx_indexes?(model))}
-  models
+  get_all_models.find_all {|model| model.constantize.table_exists? && model_is_valid_to_indexes?(model) && !model_has_sphinx_indexes?(model)}.sort
 end
 
 # Method to Wirite the Indexer Model
