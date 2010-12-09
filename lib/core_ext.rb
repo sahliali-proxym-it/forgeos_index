@@ -51,7 +51,7 @@ end
 
 # Méthod to get type of column name
 def get_type_column(model_name, column_name)
-  model_name.constantize.content_columns.detect{|elt| elt.name == column_name}.type rescue nil
+  model_name.constantize.content_columns.detect{|elt| elt.name == column_name}.type
 end
 
 # generate code line in define_index :
@@ -88,7 +88,7 @@ end
 
 # Method to get all attributes for model name
 def get_all_attributes_for_model(model_name)
-  return model_name.constantize.content_columns.map(&:name)
+  model_name.constantize.content_columns.map(&:name)
 end
 
 
