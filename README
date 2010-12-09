@@ -12,6 +12,8 @@ Plugin to Manage Sphinx Indexation
 Installation
 =============
 
+./script/plugin install git://github.com/sahliali-proxym-it/forgeos_index.git
+
 After installation the pulgin
 
 *** add the resources indexers in your route.rb
@@ -33,6 +35,14 @@ In vendor/plugin/forgeos_core/lib/forgeos/admin_menu.rb
 Example
 ===========
 
+
+Open your path /indexers
+
+- Activer ActualityTranslation
+- Check actuality_id,locale and title 
+- Save
+- Run rake ts:rebuild
+- In console IndexerActualityTranslation.search
 
 
 ===========
