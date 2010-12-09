@@ -71,8 +71,8 @@ class IndexTable < ActiveRecord::Base
   # Method that checks if the model contains at least an indexer on a string or a text type
   def has_a_minimum_one_string_type?
     self.index_table_fields.map(&:field_name).each do |field_name|
-      self.table_name.constantize.content_columns.each {|elt| return true if (elt.name == field_name && (elt.type == :string || elt.type == :text))}
-      return false
+      self.table_name.constantize.content_columns.each {|elt| return true if (elt.name == field_name && (elt.type == :string || elt.type == :text))}      
     end
+    return false
   end
 end
