@@ -51,7 +51,7 @@ end
 
 # Méthod to get type of column name
 def get_type_column(model_name, column_name)
-  model_name.constantize.content_columns.detect{|elt| elt.name == column_name}.type
+  model_name.constantize.columns.detect{|elt| elt.name == column_name}.type rescue nil
 end
 
 # generate code line in define_index :
@@ -69,11 +69,11 @@ def get_index_method(model_name, column_name)
   code_index
 end
 
-# Method that checks whether the model can be indexed, the model must have at least one field of type string or text
+# Method that check whether the model can be indexed, the model must have at least one field of type string or text
 def model_is_valid_to_indexes?(model_name)
   ignored_models = ["IndexTableField", "IndexTable"]
   return false if ignored_models.include?(model_name)
-  types = model_name.constantize.content_columns.map(&:type)
+  types = model_name.constantize.columns.map(&:type)
   unless types.empty?
     types.include?(:string) || types.include?(:text)
   else
@@ -88,7 +88,7 @@ end
 
 # Method to get all attributes for model name
 def get_all_attributes_for_model(model_name)
-  model_name.constantize.content_columns.map(&:name)
+  return model_name.constantize.column_names
 end
 
 
