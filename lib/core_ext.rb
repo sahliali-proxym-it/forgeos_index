@@ -16,7 +16,7 @@ end
 # Else the model is desactivated
 def write_file_models_indexer
   cleanup  
-  models = IndexTable.find_all_by_activated(true)
+  models = IndexTable.activated
   unless models.empty?    
     models.each do |model|
       code = ""
@@ -30,7 +30,7 @@ def write_file_models_indexer
           code += "end \n\n"
           File.open(get_file_name(model.table_name), 'w') {|f| f.write(code) }
         else
-          model.desactivate
+          model.desactivate!
         end
       end           
     end   
@@ -51,10 +51,7 @@ end
 
 # Méthod to get type of column name
 def get_type_column(model_name, column_name)
-  type_column = nil
-  return :integer if column_name == "id"
-  model_name.constantize.content_columns.each {|elt| type_column = elt.type if elt.name == column_name}
-  type_column
+  model_name.constantize.content_columns.detect{|elt| elt.name == column_name}.type rescue nil
 end
 
 # generate code line in define_index :
@@ -91,6 +88,8 @@ end
 
 # Method to get all attributes for model name
 def get_all_attributes_for_model(model_name)
-  return model_name.constantize.column_names
+  return model_name.constantize.content_columns.map(&:name)
 end
+
+
 

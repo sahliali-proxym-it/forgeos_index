@@ -1,7 +1,8 @@
 class IndexTable < ActiveRecord::Base
 
   has_many :index_table_fields
-  
+  named_scope :activated, :conditions => ["activated = true"]
+
   def self.get_indexes_attributes(model_name)
     record = find_by_table_name(model_name)
     record ? record.index_table_fields : []
@@ -9,7 +10,7 @@ class IndexTable < ActiveRecord::Base
 
   def self.is_activated?(model_name)
     record =  find_by_table_name(model_name)
-    record ? record.activated : false      
+    record ? record.activated : false
   end
 
   def self.exist_table?(model_name)
@@ -23,7 +24,7 @@ class IndexTable < ActiveRecord::Base
       options[:models].each do |model_name|
         index_table = find_by_table_name(model_name)
         if index_table
-          index_table.activate
+          index_table.activate!
           index_table.remove_uncheked_fields
         else
           IndexTable.create(:table_name => model_name, :activated => true)
@@ -43,14 +44,14 @@ class IndexTable < ActiveRecord::Base
   end
 
   def self.descativate_models
-    find_all_by_activated(true).each {|index_table| index_table.desactivate}
+    find_all_by_activated(true).each {|index_table| index_table.desactivate!}
   end
 
-  def activate
+  def activate!
     update_attribute(:activated, true)
   end
 
-  def desactivate
+  def desactivate!
     update_attribute(:activated, false)
   end
 
