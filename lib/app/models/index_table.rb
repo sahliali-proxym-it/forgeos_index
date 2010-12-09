@@ -13,9 +13,8 @@ class IndexTable < ActiveRecord::Base
     record ? record.activated : false
   end
 
-  def self.exist_table?(model_name)
-    record =  find_by_table_name(model_name)
-    record ? true : false
+  def self.exist_table?(model_name)    
+    find_by_table_name(model_name) ? true : false
   end
 
   def self.create_or_update_attributes(options)   
